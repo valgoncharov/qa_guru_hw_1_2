@@ -17,7 +17,7 @@ def status() -> AppStatus:
     return AppStatus(users=bool(users))
 
 
-@app.get("/api/users/{user_id}", summary='Просмотр данных пользователя', tags=['Healthcheck'], status_code=HTTPStatus.OK)
+@app.get("/api/users/{user_id}", summary='Просмотр данных пользователя', tags=['Admin'], status_code=HTTPStatus.OK)
 async def get_user(user_id: int) -> UserData:
     if user_id < 1:
         raise HTTPException(status_code=HTTPStatus.UNPROCESSABLE_ENTITY, detail="Invalid user id")
@@ -26,7 +26,7 @@ async def get_user(user_id: int) -> UserData:
     return users[user_id - 1]
 
 
-@app.get("/api/users/", summary='Просмотр данных пользователей', tags=['Healthcheck'], status_code=HTTPStatus.OK)
+@app.get("/api/users/", summary='Просмотр данных пользователей', tags=['Admin'], status_code=HTTPStatus.OK)
 def get_users() -> Page[UserData]:
     return paginate(users)
 
