@@ -26,7 +26,7 @@ async def get_user(user_id: int) -> UserData:
     return users[user_id - 1]
 
 
-@app.get("/api/users/", summary='Просмотр данных пользователей', tags=['Admin'], status_code=HTTPStatus.OK)
+@app.get("/api/users/", summary='Просмотр данных всех пользователей', tags=['Admin'], status_code=HTTPStatus.OK)
 def get_users() -> Page[UserData]:
     return paginate(users)
 
