@@ -15,7 +15,8 @@ git clone https://github.com/valgoncharov/qa_guru_hw_1_2.git
 pip install -r requirements.txt
 
 # Установить переменную APP_URL
-Создать в корне проекта файл .env, используя данные из шаблона файла .env.samle. Указать необходимый url для сервиса FastApi
+Создать в корне проекта файл .env, используя данные из шаблона файла .env.samle.
+Указать необходимый url для сервиса FastApi
 
 # Запустить сервис FastApi:
 uvicorn main:app --reload
