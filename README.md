@@ -37,7 +37,7 @@ pytest ./tests/test_pagination.py
 GET /status
 
 ## Запрос на "Просмотр данных всех пользователей" с пагинацией:
-GET /api/users
+GET /users
 
 ## Запрос на "Просмотр данных пользователя" указав id пользователя:
-GET /api/users/{user_id}
+GET /users/{user_id}
