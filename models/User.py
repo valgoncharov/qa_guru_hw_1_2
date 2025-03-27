@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr, HttpUrl
 
 
-class UserData(BaseModel):
+class User(BaseModel):
     id: int
     email: EmailStr
     first_name: str
@@ -18,7 +18,7 @@ class UserCreateData(BaseModel):
 
 
 class UserResponse(BaseModel):
-    data: UserData
+    data: User
 
 
 class UserUpdateData(BaseModel):
