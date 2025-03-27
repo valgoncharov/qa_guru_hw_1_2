@@ -11,7 +11,6 @@ from models.AppStatus import AppStatus
 app = FastAPI()
 add_pagination(app)
 
-# Global variable to store users
 users: list[User] = []
 
 
@@ -38,7 +37,6 @@ def get_user(user_id: int) -> User:
         raise HTTPException(
             status_code=HTTPStatus.UNPROCESSABLE_ENTITY, detail="Invalid user id")
 
-    # Find user by ID
     user = next((user for user in users if user.id == user_id), None)
     if not user:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
