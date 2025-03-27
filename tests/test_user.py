@@ -9,7 +9,7 @@ from fastapi_pagination import Page
 
 @pytest.fixture
 def users(app_url):
-    response = requests.get(f"{app_url}/users/")
+    response = requests.get(f"{app_url}/users")
     assert response.status_code == HTTPStatus.OK
     return response.json()
 
@@ -17,7 +17,7 @@ def users(app_url):
 class TestUserData:
 
     def test_users1(self, app_url):
-        response = requests.get(f"{app_url}/api/users/")
+        response = requests.get(f"{app_url}/users")
         assert response.status_code == HTTPStatus.OK
 
         users = response.json()
@@ -26,7 +26,7 @@ class TestUserData:
 
     @pytest.mark.parametrize("user_id", [1, 6, 14])
     def test_user1(self, app_url, user_id: int):
-        response = requests.get(f"{app_url}/api/users/{user_id}")
+        response = requests.get(f"{app_url}/users/{user_id}")
         assert response.status_code == HTTPStatus.OK
 
         user = response.json()
@@ -38,18 +38,18 @@ class TestUserData:
 
     @pytest.mark.parametrize("user_id", [15])
     def test_user_invalid_values(self, app_url, user_id: int):
-        response = requests.get(f"{app_url}/api/users/{user_id}")
+        response = requests.get(f"{app_url}/users/{user_id}")
         assert response.status_code == HTTPStatus.NOT_FOUND
 
     def test_users(self, app_url):
-        response = requests.get(f"{app_url}/api/users/")
+        response = requests.get(f"{app_url}/users/")
         assert response.status_code == HTTPStatus.OK
         users_data = response.json()
         Page[User].model_validate(users_data)
 
     def test_user(self, app_url):
         user_id = randint(1, 13)
-        response = requests.get(f"{app_url}/api/users/{user_id}")
+        response = requests.get(f"{app_url}/users/{user_id}")
         assert response.status_code == HTTPStatus.OK
 
         user = response.json()
@@ -57,10 +57,10 @@ class TestUserData:
 
     @pytest.mark.parametrize("user_id", [111])
     def test_nonexistent_user(self, app_url, user_id):
-        response = requests.get(f"{app_url}/api/users/{user_id}")
+        response = requests.get(f"{app_url}/users/{user_id}")
         assert response.status_code == HTTPStatus.NOT_FOUND
 
     @pytest.mark.parametrize("user_id", ["str", 0, -1, 1.1, " "])
     def test_user_data_type(self, app_url, user_id):
-        response = requests.get(f"{app_url}/api/users/{user_id}")
+        response = requests.get(f"{app_url}/users/{user_id}")
         assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
