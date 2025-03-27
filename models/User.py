@@ -1,33 +1,32 @@
 from pydantic import BaseModel, EmailStr, HttpUrl
 
 
-class User(BaseModel):
-    id: int
+class UserBase(BaseModel):
     email: EmailStr
     first_name: str
     last_name: str
     job_title: str
+
+
+class UserCreate(UserBase):
+    pass
+
+
+class UserUpdate(UserBase):
+    id: int
+
+
+class User(UserBase):
+    id: int
     avatar: HttpUrl
 
-
-class UserCreateData(BaseModel):
-    email: str
-    first_name: str
-    last_name: str
-    job_title: str
+    class Config:
+        from_attributes = True
 
 
 class UserResponse(BaseModel):
     data: User
 
 
-class UserUpdateData(BaseModel):
-    id: int
-    email: str
-    first_name: str
-    last_name: str
-    job_title: str
-
-
-class UserDeleteData(BaseModel):
+class UserDelete(BaseModel):
     id: int
