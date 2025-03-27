@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, HttpUrl
+from pydantic import BaseModel, EmailStr, HttpUrl, ConfigDict
 
 
 class UserBase(BaseModel):
@@ -19,9 +19,7 @@ class UserUpdate(UserBase):
 class User(UserBase):
     id: int
     avatar: HttpUrl
-
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserResponse(BaseModel):
